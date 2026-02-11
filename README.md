@@ -1,3 +1,4 @@
+
 # Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student
 
 ## AIM:
@@ -14,6 +15,7 @@ To write a program to implement the the Logistic Regression Model to Predict the
 4. Predict and evaluate the model using the test data and calculate accuracy and confusion matrix.
 
 ## Program:
+```
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
