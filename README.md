@@ -14,7 +14,6 @@ To write a program to implement the the Logistic Regression Model to Predict the
 4. Predict and evaluate the model using the test data and calculate accuracy and confusion matrix.
 
 ## Program:
-# Import libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -25,40 +24,30 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
-# Load dataset
 data = pd.read_csv("Placement_Data.csv")
 
-# Drop serial number and salary
-# Salary is dropped because it contains NaNs for unplaced students
-# and is a target-leaking variable (you only have it if status is 'Placed')
+
 drops = ['sl_no', 'salary']
 data = data.drop([c for c in drops if c in data.columns], axis=1)
 
-# Convert categorical columns into numbers
 le = LabelEncoder()
 for column in data.columns:
     if data[column].dtype == 'object':
         data[column] = le.fit_transform(data[column])
 
-# Define features and target
 X = data.drop('status', axis=1)
 y = data['status']
 
-# Split dataset
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
-# Create Logistic Regression model
 model = LogisticRegression(max_iter=1000)
 
-# Train model
 model.fit(X_train, y_train)
 
-# Make predictions
 y_pred = model.predict(X_test)
 
-# Evaluate model
 accuracy = accuracy_score(y_test, y_pred)
 
 print("Accuracy:", accuracy)
@@ -68,7 +57,6 @@ print(confusion_matrix(y_test, y_pred))
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred))
 
-# Plot confusion matrix
 plt.figure(figsize=(8,6))
 sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt='d', cmap='Blues')
 plt.title("Confusion Matrix")
